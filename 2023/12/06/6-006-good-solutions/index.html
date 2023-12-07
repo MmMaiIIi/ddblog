@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>6.006 good solutions | dd's Blog</title><meta name="author" content="dd"><meta name="copyright" content="dd"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="驯服看似不那么直觉的思路到自己的直觉库里 于12月初完成6.006，好题集合！希望能形成知识的复利效应，学得越多学得越快！ Problem set 0数学归纳法本质是DP(动态规划)，Base(递归基础，初始状态)，状态转移方程，终点状态 Problem set 1动态数组摊销成本O(1) 	重开时间匹配添加次数    正常数组 添加新元素 O(n) 移到新的大小为 n+1 的内存    动态数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.006 good solutions">
+<meta property="og:url" content="https://mmmaiiii.github.io/ddblog/2023/12/06/6-006-good-solutions/index.html">
+<meta property="og:site_name" content="dd&#39;s Blog">
+<meta property="og:description" content="驯服看似不那么直觉的思路到自己的直觉库里 于12月初完成6.006，好题集合！希望能形成知识的复利效应，学得越多学得越快！ Problem set 0数学归纳法本质是DP(动态规划)，Base(递归基础，初始状态)，状态转移方程，终点状态 Problem set 1动态数组摊销成本O(1) 	重开时间匹配添加次数    正常数组 添加新元素 O(n) 移到新的大小为 n+1 的内存    动态数组">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-12-06T18:31:21.000Z">
+<meta property="article:modified_time" content="2023-12-07T21:30:53.071Z">
+<meta property="article:author" content="dd">
+<meta property="article:tag" content="Data Structure and Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/ddblog/img/favicon.png"><link rel="canonical" href="https://mmmaiiii.github.io/ddblog/2023/12/06/6-006-good-solutions/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/ddblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/ddblog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '6.006 good solutions',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-07 22:30:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ddblog/" title="dd's Blog"><span class="site-name">dd's Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">6.006 good solutions</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-06T18:31:21.000Z" title="Created 2023-12-06 19:31:21">2023-12-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-07T21:30:53.071Z" title="Updated 2023-12-07 22:30:53">2023-12-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="6.006 good solutions"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>驯服看似不那么直觉的思路到自己的直觉库里</strong></p>
+<p><strong>于12月初完成6.006，好题集合！希望能形成知识的复利效应，学得越多学得越快！</strong></p>
+<h2 id="Problem-set-0"><a href="#Problem-set-0" class="headerlink" title="Problem set 0"></a>Problem set 0</h2><h4 id="数学归纳法"><a href="#数学归纳法" class="headerlink" title="数学归纳法"></a>数学归纳法</h4><p>本质是<strong>DP</strong>(动态规划)，Base(递归基础，初始状态)，状态转移方程，终点状态</p>
+<h2 id="Problem-set-1"><a href="#Problem-set-1" class="headerlink" title="Problem set 1"></a>Problem set 1</h2><h4 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h4><p>摊销成本O(1) 	重开时间匹配添加次数</p>
+<table>
+<thead>
+<tr>
+<th align="center">正常数组</th>
+<th align="center">添加新元素</th>
+<th align="center">O(n)</th>
+<th align="center">移到新的大小为 n+1 的内存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>动态数组</strong></td>
+<td align="center"><strong>添加新元素</strong></td>
+<td align="center"><strong>O(1)</strong></td>
+<td align="center"><strong>转移到新的按比例 （2n, 3n..) 的内存</strong></td>
+</tr>
+</tbody></table>
+<h2 id="Problem-set-2"><a href="#Problem-set-2" class="headerlink" title="Problem set 2"></a>Problem set 2</h2><h4 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h4><p>合并两 <strong>tuple</strong> – (s, t, num)</p>
+<p>本质为<strong>分治</strong> </p>
+<p>人类合并区间精髓 (琐碎的边界考虑，隐含的条件适用，关键断点的维护</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_booking</span>(<span class="params">B1, B2</span>):</span><br><span class="line">    B = []</span><br><span class="line">    n, m = <span class="built_in">len</span>(B1), <span class="built_in">len</span>(B2)</span><br><span class="line">    i, j, x= <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> <span class="comment"># x断点维护 -- 本题关键</span></span><br><span class="line">    <span class="keyword">while</span> i + j &lt; n + m:</span><br><span class="line">        <span class="keyword">if</span> i &lt; n: k1, s1, e1 = B1[i] <span class="comment"># 边界考虑</span></span><br><span class="line">        <span class="keyword">if</span> j &lt; m: k2, s2, e2 = B2[j]</span><br><span class="line">        <span class="keyword">if</span> j == m: <span class="comment"># 边界考虑</span></span><br><span class="line">            k, s, x = k1, <span class="built_in">max</span>(x, s1), e1</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> i == n: <span class="comment"># 边界考虑</span></span><br><span class="line">            k, s, x = k2, <span class="built_in">max</span>(x, s2), e2</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="comment"># 正常情况</span></span><br><span class="line">            x = <span class="built_in">max</span>(x, <span class="built_in">min</span>(s1, s2)) <span class="comment"># 考虑到s1 &gt; x 的情况，把x移到s1的位置</span></span><br><span class="line">            <span class="keyword">if</span> s2 &gt;= e1:</span><br><span class="line">                k, s, x = k1, x, e1</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> s1 &gt;= e2:</span><br><span class="line">                k, s, x = k2, x, e2</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> x &lt; s2: <span class="comment"># critical -&gt; which means s1 &lt;= x &lt; s2</span></span><br><span class="line">                k, s, x = k1, x, s2 <span class="comment"># cannot be k1, s1, s2</span></span><br><span class="line">            <span class="keyword">elif</span> x &lt; s1:</span><br><span class="line">                k, s, x = k2, x, s1</span><br><span class="line">            <span class="keyword">else</span>: <span class="comment"># x &gt;= s1 and x &gt;= s2</span></span><br><span class="line">                k, s, x = k1 + k2, x, <span class="built_in">min</span>(e1, e2)</span><br><span class="line">                <span class="keyword">if</span> x == e1: i += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> x == e2: j += <span class="number">1</span></span><br><span class="line">        B.append((k, s, x))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Problem-set-3"><a href="#Problem-set-3" class="headerlink" title="Problem set 3"></a>Problem set 3</h2><h4 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h4><p>u —-&gt; n   （u映射到n，u 远大于 n</p>
+<h4 id="通用哈希"><a href="#通用哈希" class="headerlink" title="通用哈希"></a>通用哈希</h4><p>初始化时从一组哈希函数<strong>随机</strong>选择一个特定哈希函数</p>
+<p>后面每一次查找&#x2F;插入都<strong>不会更换</strong>哈希函数</p>
+<p><strong>初始化的随机性</strong>保证不会在特定输入集合下发生collision</p>
+<h4 id="线性排序"><a href="#线性排序" class="headerlink" title="线性排序"></a>线性排序</h4><h5 id="u-≥-max-x-key-牺牲内存换速度"><a href="#u-≥-max-x-key-牺牲内存换速度" class="headerlink" title="u ≥ max_x_key, 牺牲内存换速度"></a>u ≥ max_x_key, 牺牲内存换速度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">direct_access_sort</span>(<span class="params">A</span>): </span><br><span class="line">    u = <span class="number">1</span> + <span class="built_in">max</span>(x.key <span class="keyword">for</span> x <span class="keyword">in</span> A)</span><br><span class="line">    D = [<span class="literal">None</span>] * u</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        D[x.key] = x</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> D:</span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            A[i] = D[key]</span><br><span class="line">            i += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="解决重复键值-法1，-链表"><a href="#解决重复键值-法1，-链表" class="headerlink" title="解决重复键值 法1， 链表"></a>解决重复键值 法1， 链表</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">counting_sort</span>(<span class="params">A</span>):</span><br><span class="line">    u = <span class="number">1</span> + <span class="built_in">max</span>(x.key <span class="keyword">for</span> x <span class="keyword">in</span> A)</span><br><span class="line">    D = [[] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(u)]</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        D[x.key].append(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> chain <span class="keyword">in</span> D:</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> chain:</span><br><span class="line">            A[i] = x</span><br><span class="line">            i += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="解决重复键值-法2，-累加坐标法"><a href="#解决重复键值-法2，-累加坐标法" class="headerlink" title="解决重复键值 法2， 累加坐标法"></a>解决重复键值 法2， 累加坐标法</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def counting_cumulative_sort(A):</span><br><span class="line">    u = 1 + max(x.key for x in A)</span><br><span class="line">    D = [None] * u</span><br><span class="line">    i = 0</span><br><span class="line">    for x in A:</span><br><span class="line">        D[x.key] += 1</span><br><span class="line">    for j in range(1, u):</span><br><span class="line">        D[j] += D[j - 1]</span><br><span class="line">    for x in list(reversed(A)): # 翻转：相同键值元素的相对顺序保持</span><br><span class="line">        A[D[x.key] - 1] = x</span><br><span class="line">        D[x.key] -= 1</span><br></pre></td></tr></table></figure>
+
+<h5 id="tuple-sort-最后才是用最重要的key一锤定音"><a href="#tuple-sort-最后才是用最重要的key一锤定音" class="headerlink" title="tuple sort 最后才是用最重要的key一锤定音"></a>tuple sort 最后才是用最重要的key一锤定音</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">连起来了</span></span><br><span class="line"><span class="string">radix_sort</span></span><br><span class="line"><span class="string">解决large_range_interger_key_sets 问题</span></span><br><span class="line"><span class="string">counting_sort -&gt; 重复键值</span></span><br><span class="line"><span class="string">radix_sort -&gt; break integer into digit -&gt; counting_sort(tuple sort)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">radix_sort</span>(<span class="params">A</span>): <span class="comment"># O(n*c)</span></span><br><span class="line">    <span class="string">&quot;Sort A assuming have non-negative key&quot;</span></span><br><span class="line">    n = <span class="built_in">len</span>(A)</span><br><span class="line">    u = <span class="number">1</span> + <span class="built_in">max</span>(x.key <span class="keyword">for</span> x <span class="keyword">in</span> A)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Obj</span>(): <span class="keyword">pass</span></span><br><span class="line">    D = [Obj() <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">    c = <span class="number">1</span> + (u.bit_length() // n.bit_length())</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        D[i].digit = []</span><br><span class="line">        D[i].item = A[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(c):</span><br><span class="line">            high, low = <span class="built_in">divmod</span>(A[i], n)</span><br><span class="line">            D[i].digit.append(low) <span class="comment"># 与正常的利用进制记录到int里不同，利用list可以记录不只一位数字</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(c):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            D[j].key = D[j].digit[i] <span class="comment"># 先从least important开始排序，保证正确</span></span><br><span class="line">        counting_sort(D)  <span class="comment"># tuple sort</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(D):</span><br><span class="line">        A[i] = D[i].item</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Problem-set-4"><a href="#Problem-set-4" class="headerlink" title="Problem set 4"></a>Problem set 4</h2><h4 id="Little-Exercise"><a href="#Little-Exercise" class="headerlink" title="Little Exercise"></a>Little Exercise</h4><p>​	<strong>PROOF</strong>: A height-balanced tree is balanced. </p>
+<h5 id="Balanced"><a href="#Balanced" class="headerlink" title="Balanced:"></a>Balanced:</h5><p>​	h &#x3D; O(log n)</p>
+<h5 id="Skew"><a href="#Skew" class="headerlink" title="Skew:"></a>Skew:</h5><p>​	h(right_node) - h(left_node)</p>
+<p>​	the height of its right subtree minus the height of its left subtree (the height of an empty subtree is −1</p>
+<h5 id="height-balanced"><a href="#height-balanced" class="headerlink" title="height-balanced:"></a>height-balanced:</h5><p>​	it’s skew is either −1, 0, or 1.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">证明Balanced:  h = O(log n)</span><br><span class="line">夹逼思想: h↑ n↓ ==&gt; h ≤ log n</span><br><span class="line">利用height-balanced特性: |skew| ≤ 1</span><br><span class="line">定义 F(h): |skew| ≤ 1, 以最少的点(n↓)达到高度h</span><br><span class="line">|skew| ≤ 1 ==&gt; F(h) = 1 + F(h-1) + F(h-2) ≥ 2F(h-2) ==&gt; F(h) ≥ 2^(h/2) ==&gt; h ≤ log n</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="切披萨-二维最大前缀和"><a href="#切披萨-二维最大前缀和" class="headerlink" title="切披萨 **二维最大前缀和**"></a>切披萨 <code>**二维最大前缀和**</code></h5><p><strong><code>一维最大前缀和</code></strong></p>
+<p><strong><code>max_prefix()，return(max_prefix, max_prefix_key) O(1)</code></strong></p>
+<p>每次对树节点的操作（插入、删除、交换），都按照<strong>max_prefix</strong>和<strong>max_prefix_key</strong>的<code>**定义**</code>更新节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">subtree_update</span>(<span class="params">A</span>): </span><br><span class="line">    A.<span class="built_in">sum</span> = A.item.val</span><br><span class="line">    <span class="keyword">if</span> A.left: A.<span class="built_in">sum</span> += A.left.<span class="built_in">sum</span></span><br><span class="line">    <span class="keyword">if</span> A.right: A.<span class="built_in">sum</span> += A.right.<span class="built_in">sum</span></span><br><span class="line">    <span class="comment"># set AVL 树 左小右大  分治</span></span><br><span class="line">    <span class="comment"># update A.max_prefix</span></span><br><span class="line">    left, right = -<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>), -<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    middle = A.item.val</span><br><span class="line">    <span class="keyword">if</span> A.left:</span><br><span class="line">        left = A.left.max_prefix</span><br><span class="line">        middle += A.left.<span class="built_in">sum</span></span><br><span class="line">    <span class="keyword">if</span> A.right:</span><br><span class="line">        right = middle + A.right.max_prefix</span><br><span class="line">    A.max_prefix = <span class="built_in">max</span>(left, middle, right) </span><br><span class="line">    <span class="comment"># update A.max_prefix_key</span></span><br><span class="line">    <span class="keyword">if</span> A.max_prefix == left:</span><br><span class="line">        A.max_prefix_key = A.left.max_prefix_key</span><br><span class="line">    <span class="keyword">elif</span> A.max_prefix == right:</span><br><span class="line">        A.max_prefix_key = A.right.max_prefix_key</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A.max_prefix_key = A.item.key</span><br></pre></td></tr></table></figure>
+
+<p>return self.root.max_prefix, self.root.max_prefix_key 即可</p>
+<p><strong><code>max_prefix() ---&gt; 二维前缀和？</code></strong></p>
+<p>循环<code>x</code>，每次循环都取出<code>y_max_prefix</code></p>
+<p>比较每一轮<code>x</code>对应的<code>y_max_prefix</code>即可</p>
+<h2 id="Problem-set-5"><a href="#Problem-set-5" class="headerlink" title="Problem set 5"></a>Problem set 5</h2><p>multi-source –&gt; single-source	<strong><code>超级节点</code></strong></p>
+<h4 id="Statum-Quest"><a href="#Statum-Quest" class="headerlink" title="Statum Quest"></a>Statum Quest</h4><p>有些边需要钥匙连通（位于特定节点, 总共四种钥匙）</p>
+<p><strong><code>开状态大法</code></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[node][k], 0≤k≤2^4  =&gt;  手中钥匙状态</span><br></pre></td></tr></table></figure>
+
+<p>然后记忆化搜索即可</p>
+<p><strong><code>构造多点多边大法</code></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -&gt; 2^4 node&#x27;  =&gt;  按照当前node&#x27;的钥匙状态去连边</span><br></pre></td></tr></table></figure>
+
+<p>直接搜索</p>
+<h2 id="Problem-set-6"><a href="#Problem-set-6" class="headerlink" title="Problem set 6"></a>Problem set 6</h2><table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Time</th>
+<th align="center">condition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>BFS&#x2F;DFS</strong></td>
+<td align="center">O(|V| + |E|)</td>
+<td align="center">no-cycle</td>
+</tr>
+<tr>
+<td align="center"><strong>Bellman-ford</strong></td>
+<td align="center">O(|V|* |E|)</td>
+<td align="center">any</td>
+</tr>
+<tr>
+<td align="center"><strong>Dijkstra</strong></td>
+<td align="center">O(|V|log|V| + |E|)</td>
+<td align="center">non-negative</td>
+</tr>
+</tbody></table>
+<h5 id="加油站"><a href="#加油站" class="headerlink" title="加油站"></a>加油站</h5><p>不知道加多少油？**<code>暴力DP建点</code>**</p>
+<p><strong><code>Johnson Algorithm</code></strong></p>
+<p>有负边 -&gt; 无负边 -&gt; <strong><code>dijkstra()</code></strong></p>
+<p><strong><code>丝滑构造</code></strong>	有负边 -&gt; 无负边</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">赋值点u -&gt;  h(u)		</span><br><span class="line">修改边(u,v) -&gt; w&#x27;(u, v) = w(u, v) + h(u) - h(v)</span><br><span class="line">对于单点root来说，最短路径不受中间点影响，d(v) = d(root) + h(root) - h(v) + Σw</span><br><span class="line"></span><br><span class="line">如何让w&#x27; ≥ 0</span><br><span class="line">bellman-ford从超级节点root跑一遍全图，dist(u) -&gt; h(u)</span><br><span class="line">w(u, v) + dist(u) ≥ dist(v) </span><br><span class="line">w(u, v) + h(u) - h(v) ≥ 0 得证</span><br></pre></td></tr></table></figure>
+
+<p>对每个点跑<code>dijkstra</code>即可得到全图最短路径</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://mmmaiiii.github.io/ddblog">dd</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://mmmaiiii.github.io/ddblog/2023/12/06/6-006-good-solutions/">https://mmmaiiii.github.io/ddblog/2023/12/06/6-006-good-solutions/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/ddblog/tags/Data-Structure-and-Algorithm/">Data Structure and Algorithm</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ddblog/2023/12/07/Computer%20architecture%20Lab2/" title="Computer architecture Lab2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Computer architecture Lab2</div></div></a></div><div class="next-post pull-right"><a href="/ddblog/2023/12/06/Computer%20architecture%20Lab1%20report/" title="Computer architecture Lab1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Computer architecture Lab1</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/ddblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dd</div><div class="author-info__description">CS study route track</div></div><div class="card-info-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-0"><span class="toc-number">1.</span> <span class="toc-text">Problem set 0</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95"><span class="toc-number">1.0.1.</span> <span class="toc-text">数学归纳法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-1"><span class="toc-number">2.</span> <span class="toc-text">Problem set 1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84"><span class="toc-number">2.0.1.</span> <span class="toc-text">动态数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-2"><span class="toc-number">3.</span> <span class="toc-text">Problem set 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6"><span class="toc-number">3.0.1.</span> <span class="toc-text">区间合并</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-3"><span class="toc-number">4.</span> <span class="toc-text">Problem set 3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%88%E5%B8%8C"><span class="toc-number">4.0.1.</span> <span class="toc-text">哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%93%88%E5%B8%8C"><span class="toc-number">4.0.2.</span> <span class="toc-text">通用哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%92%E5%BA%8F"><span class="toc-number">4.0.3.</span> <span class="toc-text">线性排序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-%E2%89%A5-max-x-key-%E7%89%BA%E7%89%B2%E5%86%85%E5%AD%98%E6%8D%A2%E9%80%9F%E5%BA%A6"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">u ≥ max_x_key, 牺牲内存换速度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%87%8D%E5%A4%8D%E9%94%AE%E5%80%BC-%E6%B3%951%EF%BC%8C-%E9%93%BE%E8%A1%A8"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">解决重复键值 法1， 链表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%87%8D%E5%A4%8D%E9%94%AE%E5%80%BC-%E6%B3%952%EF%BC%8C-%E7%B4%AF%E5%8A%A0%E5%9D%90%E6%A0%87%E6%B3%95"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">解决重复键值 法2， 累加坐标法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#tuple-sort-%E6%9C%80%E5%90%8E%E6%89%8D%E6%98%AF%E7%94%A8%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84key%E4%B8%80%E9%94%A4%E5%AE%9A%E9%9F%B3"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">tuple sort 最后才是用最重要的key一锤定音</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-4"><span class="toc-number">5.</span> <span class="toc-text">Problem set 4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Little-Exercise"><span class="toc-number">5.0.1.</span> <span class="toc-text">Little Exercise</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Balanced"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">Balanced:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Skew"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">Skew:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#height-balanced"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">height-balanced:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%87%E6%8A%AB%E8%90%A8-%E4%BA%8C%E7%BB%B4%E6%9C%80%E5%A4%A7%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">5.0.1.4.</span> <span class="toc-text">切披萨 **二维最大前缀和**</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-5"><span class="toc-number">6.</span> <span class="toc-text">Problem set 5</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Statum-Quest"><span class="toc-number">6.0.1.</span> <span class="toc-text">Statum Quest</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-set-6"><span class="toc-number">7.</span> <span class="toc-text">Problem set 6</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E6%B2%B9%E7%AB%99"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">加油站</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/07/Computer%20architecture%20Lab2/" title="Computer architecture Lab2">Computer architecture Lab2</a><time datetime="2023-12-07T10:52:51.000Z" title="Created 2023-12-07 11:52:51">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/06/6-006-good-solutions/" title="6.006 good solutions">6.006 good solutions</a><time datetime="2023-12-06T18:31:21.000Z" title="Created 2023-12-06 19:31:21">2023-12-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/06/Computer%20architecture%20Lab1%20report/" title="Computer architecture Lab1">Computer architecture Lab1</a><time datetime="2023-12-06T09:09:33.000Z" title="Created 2023-12-06 10:09:33">2023-12-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dd</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/ddblog/js/utils.js"></script><script src="/ddblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
