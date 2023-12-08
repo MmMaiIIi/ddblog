@@ -1,0 +1,409 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Computer architecture Lab3 | dd's Blog</title><meta name="author" content="dd"><meta name="copyright" content="dd"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Performance&#x2F;cost trade-off   Parameter 1 2 4 8 16 32    -decode:width 1981505 1285772 949186 818931 795224 792722   -issue:width 3093575 1483322 942444 805968 792724 792722   -commit:width 174524">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer architecture Lab3">
+<meta property="og:url" content="https://mmmaiiii.github.io/ddblog/2023/12/08/Computer%20architecture%20Lab3/index.html">
+<meta property="og:site_name" content="dd&#39;s Blog">
+<meta property="og:description" content="Performance&#x2F;cost trade-off   Parameter 1 2 4 8 16 32    -decode:width 1981505 1285772 949186 818931 795224 792722   -issue:width 3093575 1483322 942444 805968 792724 792722   -commit:width 174524">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-12-08T09:34:05.000Z">
+<meta property="article:modified_time" content="2023-12-08T13:16:13.299Z">
+<meta property="article:author" content="dd">
+<meta property="article:tag" content="Computer architecture">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/ddblog/img/favicon.png"><link rel="canonical" href="https://mmmaiiii.github.io/ddblog/2023/12/08/Computer%20architecture%20Lab3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/ddblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/ddblog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Computer architecture Lab3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-08 14:16:13'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ddblog/" title="dd's Blog"><span class="site-name">dd's Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Computer architecture Lab3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-08T09:34:05.000Z" title="Created 2023-12-08 10:34:05">2023-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-08T13:16:13.299Z" title="Updated 2023-12-08 14:16:13">2023-12-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Computer architecture Lab3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Performance-cost-trade-off"><a href="#Performance-cost-trade-off" class="headerlink" title="Performance&#x2F;cost trade-off"></a><strong>Performance&#x2F;cost trade-off</strong></h2><table>
+<thead>
+<tr>
+<th align="center">Parameter</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">4</th>
+<th align="center">8</th>
+<th align="center">16</th>
+<th align="center">32</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-decode:width</td>
+<td align="center">1981505</td>
+<td align="center">1285772</td>
+<td align="center">949186</td>
+<td align="center">818931</td>
+<td align="center">795224</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-issue:width</td>
+<td align="center">3093575</td>
+<td align="center">1483322</td>
+<td align="center">942444</td>
+<td align="center">805968</td>
+<td align="center">792724</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-commit:width</td>
+<td align="center">1745242</td>
+<td align="center">1005342</td>
+<td align="center">808210</td>
+<td align="center">793990</td>
+<td align="center">792790</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-res:ialu</td>
+<td align="center">2097750</td>
+<td align="center">1225278</td>
+<td align="center">874399</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:imult</td>
+<td align="center">794800</td>
+<td align="center">793083</td>
+<td align="center">792739</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpalu</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpmult</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="Scatter-plot"><a href="#Scatter-plot" class="headerlink" title="Scatter plot"></a>Scatter plot</h4><img src="C:\Users\23606\AppData\Roaming\Typora\typora-user-images\image-20231208111207146.png" alt="image-20231208111207146" style="zoom:50%;" />
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">width = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>];</span><br><span class="line">res = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line">decode = [<span class="number">1981505</span>, <span class="number">1285772</span>, <span class="number">949186</span>, <span class="number">818931</span>, <span class="number">795224</span>, <span class="number">792722</span>];</span><br><span class="line">issue = [<span class="number">3093575</span>, <span class="number">1483322</span>, <span class="number">942444</span>, <span class="number">805968</span>, <span class="number">792724</span>, <span class="number">792722</span>];</span><br><span class="line">commit = [<span class="number">1745242</span>, <span class="number">1005342</span>, <span class="number">808210</span>, <span class="number">793990</span>, <span class="number">792790</span>, <span class="number">792722</span>];</span><br><span class="line">ialu = [<span class="number">2097750</span>, <span class="number">1225278</span>, <span class="number">874399</span>, <span class="number">792722</span>];</span><br><span class="line">imult = [<span class="number">794800</span>, <span class="number">793083</span>, <span class="number">792739</span>, <span class="number">792722</span>];</span><br><span class="line">fpalu = [<span class="number">792722</span>, <span class="number">792722</span>, <span class="number">792722</span>, <span class="number">792722</span>];</span><br><span class="line">fpmult = [<span class="number">792722</span>, <span class="number">792722</span>, <span class="number">792722</span>, <span class="number">792722</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">scatter</span>(width, decode, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;decode&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;b&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">scatter</span>(width, issue, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;issue&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(width, commit, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;commit&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;g&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Parameter Value&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Performance&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Impact of Decode, Issue, and Commit on Performance&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;show&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, ialu, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;ialu&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">scatter</span>(res, imult, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;imult&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, fpalu, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;fpalu&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;y&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, fpmult, <span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;fpmult&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;k&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Parameter Value&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Performance&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Impact of total simulation time in cycles&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;show&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">set(gcf, <span class="string">&#x27;Position&#x27;</span>, get(<span class="number">0</span>, <span class="string">&#x27;Screensize&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="res-fpalu-and-res-fpmult"><a href="#res-fpalu-and-res-fpmult" class="headerlink" title="res:fpalu and res:fpmult:"></a><strong>res:fpalu and res:fpmult:</strong></h4><p>Increasing these values doesn’t contribute much to performance, suggesting that the performance may not depend on those two parameters. So <code>fpalu</code> and <code>fpmult</code> are the <code>two least important</code> parameters.</p>
+<h4 id="minimum-cost"><a href="#minimum-cost" class="headerlink" title="minimum cost"></a><strong>minimum cost</strong></h4><table>
+<thead>
+<tr>
+<th align="center">Parameter</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">4</th>
+<th align="center">8</th>
+<th align="center">16</th>
+<th align="center">32</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-decode:width</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center">949186</td>
+<td align="center">818931</td>
+<td align="center">795224</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-issue:width</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center">942444</td>
+<td align="center">805968</td>
+<td align="center">792724</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-commit:width</td>
+<td align="center">X</td>
+<td align="center">1005342</td>
+<td align="center">808210</td>
+<td align="center">793990</td>
+<td align="center">792790</td>
+<td align="center">792722</td>
+</tr>
+<tr>
+<td align="center">-res:ialu</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center">874399</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:imult</td>
+<td align="center">794800</td>
+<td align="center">793083</td>
+<td align="center">792739</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpalu</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpmult</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">792722</td>
+<td align="center">1,020,000</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>$$<br>cost&#x3D;(decode+issue+commit+rialu+imult+fpalu+fpmult)<br>$$</p>
+<p>The optimal configuration in the minimum cost, is achieved when the parameter <code>-commit:width</code> is set to 2.</p>
+<h4 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a><strong>ILP</strong></h4><p>Based on the results, when we adjust parameters like <code>decode width</code>, <code>issue width</code>, and <code>commit width</code>, the total cycle performance fluctuates. If the performance varies a lot with these changes, it suggests the benchmark has high <code>ILP</code>. This means the processor can effectively use multiple instructions at once. If performance remains stable despite changes in these parameters, it indicates low <code>ILP</code>, suggesting the processor struggles to use instructions effectively.</p>
+<h3 id="pc-ss"><a href="#pc-ss" class="headerlink" title="pc.ss"></a><strong>pc.ss</strong></h3><table>
+<thead>
+<tr>
+<th align="center">Parameter</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">4</th>
+<th align="center">8</th>
+<th align="center">16</th>
+<th align="center">32</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-decode:width</td>
+<td align="center">4039887</td>
+<td align="center">4025946</td>
+<td align="center">4019219</td>
+<td align="center">4016891</td>
+<td align="center">4016234</td>
+<td align="center">4016232</td>
+</tr>
+<tr>
+<td align="center">-issue:width</td>
+<td align="center">4193336</td>
+<td align="center">4027391</td>
+<td align="center">4019761</td>
+<td align="center">4016494</td>
+<td align="center">4016233</td>
+<td align="center">4016232</td>
+</tr>
+<tr>
+<td align="center">-commit:width</td>
+<td align="center">4036100</td>
+<td align="center">4024292</td>
+<td align="center">4018742</td>
+<td align="center">4016311</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+</tr>
+<tr>
+<td align="center">-res:ialu</td>
+<td align="center">4037074</td>
+<td align="center">4024593</td>
+<td align="center">4018667</td>
+<td align="center">4016232</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:imult</td>
+<td align="center">4016296</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpalu</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">-res:fpmult</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center">4016232</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<img src="C:\Users\23606\AppData\Roaming\Typora\typora-user-images\image-20231208115305737.png" alt="image-20231208115305737" style="zoom:50%;" />
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">width = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>];</span><br><span class="line">res = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line">total_cycles = [<span class="number">4039887</span>, <span class="number">4025946</span>, <span class="number">4019219</span>, <span class="number">4016891</span>, <span class="number">4016234</span>, <span class="number">4016232</span>];</span><br><span class="line"></span><br><span class="line">decode = [<span class="number">3093575</span>, <span class="number">1483322</span>, <span class="number">942444</span>, <span class="number">805968</span>, <span class="number">792724</span>, <span class="number">792722</span>];</span><br><span class="line">issue = [<span class="number">4193336</span>, <span class="number">4027391</span>, <span class="number">4019761</span>, <span class="number">4016494</span>, <span class="number">4016233</span>, <span class="number">4016232</span>];</span><br><span class="line">commit = [<span class="number">4036100</span>, <span class="number">4024292</span>, <span class="number">4018742</span>, <span class="number">4016311</span>, <span class="number">4016232</span>, <span class="number">4016232</span>];</span><br><span class="line"></span><br><span class="line">ialu = [<span class="number">4037074</span>, <span class="number">4024593</span>, <span class="number">4018667</span>, <span class="number">4016232</span>];</span><br><span class="line">imult = [<span class="number">4016296</span>, <span class="number">4016232</span>, <span class="number">4016232</span>, <span class="number">4016232</span>];</span><br><span class="line">fpalu = [<span class="number">4016232</span>, <span class="number">4016232</span>, <span class="number">4016232</span>, <span class="number">4016232</span>];</span><br><span class="line">fpmult = [<span class="number">4016232</span>, <span class="number">4016232</span>, <span class="number">4016232</span>, <span class="number">4016232</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">scatter</span>(width, decode, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;decode&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;b&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">scatter</span>(width, issue, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;issue&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(width, commit, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;commit&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;g&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Parameter Value&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Performance&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Impact of Decode, Issue, and Commit on Performance&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;show&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, ialu, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;ialu&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">scatter</span>(res, imult, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;imult&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, fpalu, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;fpalu&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;y&#x27;</span>);</span><br><span class="line"><span class="built_in">scatter</span>(res, fpmult, <span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;DisplayName&#x27;</span>, <span class="string">&#x27;fpmult&#x27;</span>, <span class="string">&#x27;MarkerEdgeColor&#x27;</span>, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;k&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Parameter Value&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Performance&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Impact of ALU, Multiplier, and FPU on Performance&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;show&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">set(gcf, <span class="string">&#x27;Position&#x27;</span>, get(<span class="number">0</span>, <span class="string">&#x27;Screensize&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="Compare-with-go-ss"><a href="#Compare-with-go-ss" class="headerlink" title="Compare with go.ss"></a>Compare with go.ss</h4><p>the <code>pc.ss</code> benchmark shows higher cycle counts and lower sensitivity to parameter changes suggests a lower degree of <code>ILP</code> compared to the <code>go.ss</code> benchmark.</p>
+<p>For <code>pc.ss</code> variations in parameters, such as <code>decode width</code>, <code>issue width</code>, etc., have a smaller impact on the overall performance. So, <code>ILP</code> is lower.</p>
+<h4 id="Best-performance-cost-trade-off"><a href="#Best-performance-cost-trade-off" class="headerlink" title="Best performance&#x2F;cost trade-off"></a>Best performance&#x2F;cost trade-off</h4><p>consider a smaller <code>ILP</code> and aim for the lowest values for the sum of all parameters</p>
+<p>set all the configuration parameters to their minimum values. </p>
+<ul>
+<li><code>-decode:width 1</code></li>
+<li><code>-issue:width 1</code></li>
+<li><code>-commit:width 1</code></li>
+<li><code>-res:ialu 1</code></li>
+<li><code>-res:imult 1</code></li>
+<li><code>-res:fpalu 1</code></li>
+<li><code>-res:fpmult 1</code></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://mmmaiiii.github.io/ddblog">dd</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://mmmaiiii.github.io/ddblog/2023/12/08/Computer%20architecture%20Lab3/">https://mmmaiiii.github.io/ddblog/2023/12/08/Computer%20architecture%20Lab3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/ddblog/tags/Computer-architecture/">Computer architecture</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/ddblog/2023/12/07/Computer%20architecture%20Lab2/" title="Computer architecture Lab2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Computer architecture Lab2</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/ddblog/2023/12/06/Computer%20architecture%20Lab1%20report/" title="Computer architecture Lab1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-06</div><div class="title">Computer architecture Lab1</div></div></a></div><div><a href="/ddblog/2023/12/07/Computer%20architecture%20Lab2/" title="Computer architecture Lab2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-07</div><div class="title">Computer architecture Lab2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/ddblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dd</div><div class="author-info__description">CS study route track</div></div><div class="card-info-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Performance-cost-trade-off"><span class="toc-number">1.</span> <span class="toc-text">Performance&#x2F;cost trade-off</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scatter-plot"><span class="toc-number">1.0.1.</span> <span class="toc-text">Scatter plot</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-fpalu-and-res-fpmult"><span class="toc-number">1.0.2.</span> <span class="toc-text">res:fpalu and res:fpmult:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#minimum-cost"><span class="toc-number">1.0.3.</span> <span class="toc-text">minimum cost</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ILP"><span class="toc-number">1.0.4.</span> <span class="toc-text">ILP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pc-ss"><span class="toc-number">1.1.</span> <span class="toc-text">pc.ss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Compare-with-go-ss"><span class="toc-number">1.1.1.</span> <span class="toc-text">Compare with go.ss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Best-performance-cost-trade-off"><span class="toc-number">1.1.2.</span> <span class="toc-text">Best performance&#x2F;cost trade-off</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/08/Computer%20architecture%20Lab3/" title="Computer architecture Lab3">Computer architecture Lab3</a><time datetime="2023-12-08T09:34:05.000Z" title="Created 2023-12-08 10:34:05">2023-12-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/07/Computer%20architecture%20Lab2/" title="Computer architecture Lab2">Computer architecture Lab2</a><time datetime="2023-12-07T10:52:51.000Z" title="Created 2023-12-07 11:52:51">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/06/6-006-good-solutions/" title="6.006 good solutions">6.006 good solutions</a><time datetime="2023-12-06T18:31:21.000Z" title="Created 2023-12-06 19:31:21">2023-12-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ddblog/2023/12/06/Computer%20architecture%20Lab1%20report/" title="Computer architecture Lab1">Computer architecture Lab1</a><time datetime="2023-12-06T09:09:33.000Z" title="Created 2023-12-06 10:09:33">2023-12-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dd</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/ddblog/js/utils.js"></script><script src="/ddblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
