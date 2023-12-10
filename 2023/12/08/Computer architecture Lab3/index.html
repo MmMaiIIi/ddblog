@@ -7,7 +7,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-12-08T09:34:05.000Z">
-<meta property="article:modified_time" content="2023-12-08T13:16:13.299Z">
+<meta property="article:modified_time" content="2023-12-09T13:12:52.771Z">
 <meta property="article:author" content="dd">
 <meta property="article:tag" content="Computer architecture">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-12-08 14:16:13'
+  postUpdate: '2023-12-09 14:12:52'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ddblog/" title="dd's Blog"><span class="site-name">dd's Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Computer architecture Lab3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-08T09:34:05.000Z" title="Created 2023-12-08 10:34:05">2023-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-08T13:16:13.299Z" title="Updated 2023-12-08 14:16:13">2023-12-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Computer architecture Lab3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Performance-cost-trade-off"><a href="#Performance-cost-trade-off" class="headerlink" title="Performance&#x2F;cost trade-off"></a><strong>Performance&#x2F;cost trade-off</strong></h2><table>
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/ddblog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/ddblog/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/ddblog/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ddblog/" title="dd's Blog"><span class="site-name">dd's Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Computer architecture Lab3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-08T09:34:05.000Z" title="Created 2023-12-08 10:34:05">2023-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-09T13:12:52.771Z" title="Updated 2023-12-09 14:12:52">2023-12-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Computer architecture Lab3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Performance-cost-trade-off"><a href="#Performance-cost-trade-off" class="headerlink" title="Performance&#x2F;cost trade-off"></a><strong>Performance&#x2F;cost trade-off</strong></h2><table>
 <thead>
 <tr>
 <th align="center">Parameter</th>
@@ -311,8 +311,9 @@
 </tr>
 </tbody></table>
 <p>$$<br>cost&#x3D;(decode+issue+commit+rialu+imult+fpalu+fpmult)<br>$$</p>
-<p>The optimal configuration in the minimum cost, is achieved when the parameter <code>-commit:width</code> is set to 2.</p>
-<h4 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a><strong>ILP</strong></h4><p>Based on the results, when we adjust parameters like <code>decode width</code>, <code>issue width</code>, and <code>commit width</code>, the total cycle performance fluctuates. If the performance varies a lot with these changes, it suggests the benchmark has high <code>ILP</code>. This means the processor can effectively use multiple instructions at once. If performance remains stable despite changes in these parameters, it indicates low <code>ILP</code>, suggesting the processor struggles to use instructions effectively.</p>
+<p>$$<br>cost &#x3D; 4 + 4 + 4 + 4 + 1 + 1 + 1 &#x3D; 19<br>$$</p>
+<h4 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a><strong>ILP</strong></h4><p>decode, issue, commit， ialu: ILP ≈ 4</p>
+<p>Based on the results, when we adjust parameters like <code>decode width</code>, <code>issue width</code>, and <code>commit width</code>, the total cycle performance fluctuates. If the performance varies a lot with these changes, it suggests the benchmark has high <code>ILP</code>. This means the processor can effectively use multiple instructions at once. If performance remains stable despite changes in these parameters, it indicates low <code>ILP</code>, suggesting the processor struggles to use instructions effectively.</p>
 <h3 id="pc-ss"><a href="#pc-ss" class="headerlink" title="pc.ss"></a><strong>pc.ss</strong></h3><table>
 <thead>
 <tr>
